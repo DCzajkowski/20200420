@@ -66,17 +66,17 @@
         const categoriesToRender = categories.filter(({ parentId }) => parentId === (level === 1 ? null : pickedCategories[level - 2]))
 
         column.innerHTML = `
-        <ul>
-          ${categoriesToRender.map(({ id, name }) => `
-            <li>
-              ${
-                categories.filter(({ parentId }) => parentId === id).length
-                ? `<button data-category-id="${id}">${name}</button>`
-                : `<span>${name}</span>`
-              }
-            </li>
-          `).join('')}
-        </ul>
+          <ul>
+            ${categoriesToRender.map(({ id, name }) => `
+              <li>
+                ${
+                  categories.filter(({ parentId }) => parentId === id).length
+                  ? `<button data-category-id="${id}">${name}</button>`
+                  : `<span>${name}</span>`
+                }
+              </li>
+            `).join('')}
+          </ul>
         `
       }
 
