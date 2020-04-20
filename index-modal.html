@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <style>
+      .modal-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #00000036;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-wrapper--hidden {
+        display: none;
+      }
+      .modal {
+        background: white;
+        padding: 2rem;
+        border-radius: 3px;
+      }
+      .categories {
+        display: flex;
+        width: 800px;
+        flex-wrap: wrap;
+        grid-gap: 2rem;
+      }
+      .category {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid gray;
+        border-radius: 3px;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button data-modal-toggler>click me</button>
+    </div>
+
+    <div class="modal-wrapper modal-wrapper--hidden">
+      <div class="modal">
+        <div class="categories">
+          <div class="category">
+            <span>🏠</span>
+            <span>85de02b8</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>849a4cf6</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>c99638f1</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>4b9d86b6</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>7e406d43</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>3296f054</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>9c9692a2</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>bc627af8</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>c4c743ce</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>c9a03587</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>f847d3a8</span>
+          </div>
+          <div class="category">
+            <span>🏠</span>
+            <span>8e400daa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.querySelector('.modal-wrapper').addEventListener('click', e => {
+        if (!e.target.classList.contains('modal-wrapper')) {
+          return
+        }
+
+        e.target.classList.toggle('modal-wrapper--hidden')
+      })
+
+      document.querySelector('[data-modal-toggler]').addEventListener('click', () => {
+        document.querySelector('.modal-wrapper').classList.toggle('modal-wrapper--hidden')
+      })
+    </script>
+  </body>
+</html>

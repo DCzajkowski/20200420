@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div style="display: flex">
+      <div style="flex: 1" data-categories-column-1></div>
+      <div style="flex: 1" data-categories-column-2></div>
+      <div style="flex: 1" data-categories-column-3></div>
+      <div style="flex: 1" data-categories-column-4></div>
+    </div>
+
+
+    <script>
+      const categories = [
+        { id: 1, name: '33d7f537-95d6-40d8-80be-27642546ae18', parentId: null },
+        { id: 2, name: '953c3fb3-1ee0-4c50-aae6-a27f70cdf961', parentId: null },
+        { id: 3, name: 'e9aa39de-2190-4bb1-a6be-3a209052d055', parentId: null },
+        { id: 4, name: 'd645a73a-bcf0-4465-a8eb-26a1dc6a56d0', parentId: null },
+        { id: 5, name: '1e2121e0-d4d1-4b8a-ad1d-c920be481b39', parentId: null },
+        { id: 6, name: '6e7908d0-82aa-4038-95d4-6fc437e97a8a', parentId: null },
+        { id: 7, name: '8d0d6b4c-452d-4736-b158-b46cc4a7862b', parentId: 1 },
+        { id: 8, name: '7c920647-bed0-465c-99a2-1a8f3d7cbde6', parentId: 1 },
+        { id: 9, name: 'ed919b4d-aa1a-4673-86b6-d1bddb538d67', parentId: 2 },
+        { id: 10, name: 'd0c3079f-ef66-4773-bd23-2a4d3b0d099a', parentId: 2 },
+        { id: 11, name: 'dbab8a06-5d2c-4b47-9561-36cdf48061ff', parentId: 7 },
+        { id: 12, name: '5eeffb60-b5ba-43b8-82f7-c5d33c6b2812', parentId: 7 },
+        { id: 13, name: '587c6625-6258-4d91-a974-8870f05f7357', parentId: 12 },
+      ]
+
+      let pickedCategories = [0, 0, 0]
+
+      function renderCategories(level) {
+        const column = document.querySelector(`[data-categories-column-${level}]`)
+        const categoriesToRender = categories.filter(({ parentId }) => parentId === (level === 1 ? null : pickedCategories[level - 2]))
+
+        column.innerHTML = `
+        <ul>
+          ${categoriesToRender.map(({ id, name }) => `
+            <li>
+              ${
+                categories.filter(({ parentId }) => parentId === id).length
+                ? `<button data-category-id="${id}">${name}</button>`
+                : `<span>${name}</span>`
+              }
+            </li>
+          `).join('')}
+        </ul>
+        `
+      }
+
+      function renderAll(from) {
+        for (const level of [1, 2, 3, 4].filter(i => i > from)) {
+          renderCategories(level)
+        }
+      }
+
+      renderAll(0)
+
+      for (const level of [1, 2, 3, 4]) {
+        const column = document.querySelector(`[data-categories-column-${level}]`)
+
+        column.addEventListener('click', e => {
+          const categoryId = e.target.getAttribute('data-category-id')
+
+          if (categoryId === null) {
+            return
+          }
+
+          pickedCategories[level - 1] = Number(categoryId)
+          renderAll(level)
+        })
+      }
+    </script>
+  </body>
+</html>
